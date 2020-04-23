@@ -1,0 +1,11 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea/.gitignore
+.idea/.name
+.idea/ChatBot.iml
+.idea/deployment.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/webServers.xml
+.idea/yii2settings.xml
+
+/emo-bot/vendor/
