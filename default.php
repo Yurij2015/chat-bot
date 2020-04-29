@@ -12,9 +12,11 @@
 echo "ChatBots";
 ?>
 <hr>
-<a href="emo-bot/bot/install">Установка</a>
+<a href="emo-bot/server/install">Установка</a>
 <hr>
-<a href="emo-bot/bot/admin">Админ</a>
+<a href="emo-bot/server/admin">Админ</a>
 
 </body>
 </html>
+
+<!--https://api.telegram.org/bot1092442739:AAGTQJxfxzbHfDTxPJQDihun8zAZcP26lTc/setwebhook?url=https://chat-bots.online/emo-bot/jkjKKjkl9aakk8jjjkjkj/telegrambot.php-->
