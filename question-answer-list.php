@@ -48,66 +48,70 @@ if (isset($_POST["import"])) {
     }
 }
 ?>
-<div class="container mt-5">
-    <h2>Import CSV file into Mysql using PHP</h2>
-    <div id="response"
-         class="<?php if (!empty($type)) {
-             echo $type . " display-block";
-         } ?>">
-        <?php if (!empty($message)) {
-            echo $message;
-        } ?>
-    </div>
-    <div class="container">
-        <div class="row">
-            <form class="form form-horizontal" action="" method="post"
-                  name="frmCSVImport" id="frmCSVImport"
-                  enctype="multipart/form-data">
-                <div class="input-row">
-                    <label class="col-md-4 control-label">Choose CSV
-                        File</label> <input type="file" name="file"
-                                            id="file" accept=".csv">
-                    <button type="submit" id="submit" name="import"
-                            class="btn btn-primary">Import
-                    </button>
-                </div>
-            </form>
+    <div class="container mt-5">
+        <h2>Import CSV file into Mysql using PHP</h2>
+        <div id="response"
+             class="<?php if (!empty($type)) {
+                 echo $type . " display-block";
+             } ?>">
+            <?php if (!empty($message)) {
+                echo $message;
+            } ?>
         </div>
-        <hr/>
+        <div class="container">
+            <div class="row">
+                <form class="form form-horizontal" action="" method="post"
+                      name="frmCSVImport" id="frmCSVImport"
+                      enctype="multipart/form-data">
+                    <div class="input-row">
+                        <label class="col-md-4 control-label">Choose CSV
+                            File</label> <input type="file" name="file"
+                                                id="file" accept=".csv">
+                        <button type="submit" id="submit" name="import"
+                                class="btn btn-primary">Import
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <hr/>
 
-        <?php
-        $sqlSelect = "SELECT * FROM questions_answers";
-        $result = $db->select($sqlSelect);
-        if (!empty($result)) {
-            ?>
-            <table class="table table-bordered table-hover" id='userTable'>
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Question</th>
-                    <th>Answer</th>
-
-                </tr>
-                </thead>
-                <?php
-
-                foreach ($result
-
-                as $row) {
+            <?php
+            $sqlSelect = "SELECT id, question, answer FROM questions_answers";
+            $result = $db->select($sqlSelect);
+            if (!empty($result)) {
                 ?>
+                <table class="table table-bordered table-hover" id='userTable'>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Question</th>
+                        <th>Answer</th>
+                    </tr>
+                    </thead>
+                    <?php
+                    foreach ($result
 
-                <tbody>
-                <tr>
-                    <td><?php echo $row['id']; ?></td>
-                    <td><?php echo $row['question']; ?></td>
-                    <td><?php echo $row['answer']; ?></td>
-                </tr>
-                <?php
-                }
-                ?>
-                </tbody>
-            </table>
-        <?php } ?>
+                    as $row) {
+                    ?>
+                    <tbody>
+                    <tr>
+                        <td><?php echo $row['id']; ?></td>
+                        <td><?php echo $row['question']; ?></td>
+                        <td><?php echo $row['answer']; ?></td>
+                    </tr>
+                    <?php
+                    }
+
+                    while($row = $result->fetch_object()){
+                        echo '<strong>Name: </strong>'.$row->name.'<br/>'.
+                            '<strong>Comment: </strong>'.$row->answer.'<br/>';
+
+                    }
+
+                    ?>
+                    </tbody>
+                </table>
+            <?php } ?>
+        </div>
     </div>
-</div>
 <?php require_once("includes/footer.php"); ?>

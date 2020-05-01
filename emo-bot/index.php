@@ -1,5 +1,7 @@
 <?php
+
 header('Content-Type: text/html; charset=utf-8');
+
 // подрубаем API
 require_once("vendor/autoload.php");
 
@@ -42,10 +44,30 @@ $bot->on(function ($Update) use ($bot) {
     $mtext = $message->getText();
     $cid = $message->getChat()->getId();
 
-    if (mb_stripos($mtext, "привет") !== false) {
-        $bot->sendMessage($message->getChat()->getId(), "Как настроение?");
+    // connect db
+    $servername = "localhost";
+    $username = "u936519911_adm";
+    $password = "ZfnFATK";
+    $dbname = "u936519911_adm";
 
+    // Create connection
+    $db = mysqli_connect($servername, $username, $password, $dbname);
+    $sqlSelect = "SELECT * FROM questions_answers WHERE question = '{$mtext}'";
+    $result = $db->query($sqlSelect);
+    if (!empty($result)) {
+        foreach ($result
+                 as $row) {
+            $answer = $row['answer'];
+            $bot->sendMessage($message->getChat()->getId(), $answer);
+        }
     }
+    mysqli_close($db);
+    //end connect db
+
+//    if (mb_stripos($mtext, ":-(") !== false) {
+//
+//        $bot->sendMessage($message->getChat()->getId(), $anwser);
+//    }
 
     if (mb_stripos($mtext, "добрый день") !== false) {
         $bot->sendMessage($message->getChat()->getId(), "Что Вас интересует?");
